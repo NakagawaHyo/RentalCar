@@ -1,0 +1,21 @@
+{
+  "name": "rentalcar",
+  "version": "1.0.0",
+  "description": "<p align=\"center\"><a href=\"https://spark-framework.net\" target=\"_blank\"><img src=\"https://i.imgur.com/AlMNK7I.png\" width=\"400\" alt=\"Spark Logo\"></a></p>",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "buildcss": "postcss wwwroot/css/site.css -o wwwroot/css/site.min.css"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "autoprefixer": "^10.4.15",
+    "postcss": "^8.4.28",
+    "postcss-cli": "^10.1.0",
+    "tailwindcss": "^3.3.3"
+  },
+  "devDependencies": {
+    "@tailwindcss/forms": "^0.5.4"
+  }
+}

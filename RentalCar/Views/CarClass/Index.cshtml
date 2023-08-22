@@ -1,0 +1,47 @@
+﻿@model IEnumerable<RentalCar.Application.Models.CarClass>
+
+@{
+    ViewData["Title"] = "クラス管理";
+    ViewData["Header"] = "クラス一覧";
+}  
+
+<section class="mx-auto max-w-6xl">
+    <div class="my-4">
+    <a asp-action="Create" class="px-4 py-2 text-sm text-white rounded-md bg-primary hover:bg-primary-dark focus:outline-none focus:ring focus:ring-primary-dark focus:ring-offset-1 focus:ring-offset-white dark:focus:ring-offset-dark">新規クラス登録</a>
+    </div>
+    <table class="max-w-6xl w-full text-sm text-left">
+        <thead class="text-xs uppercase bg-gray-50 dark:bg-gray-700">
+            <tr>
+                <th scope="col" class="px-6 py-3">
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    @Html.DisplayNameFor(model => model.carCategory)
+                </th scope="col" class="px-6 py-3">
+                <th>
+                    @Html.DisplayNameFor(model => model.DisplayOrder)
+                </th scope="col" class="px-6 py-3">
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                    <td class="px-6 py-4">
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td class="px-6 py-4">
+                        @Html.DisplayFor(modelItem => item.carCategory.Name)
+                    </td>
+                    <td class="px-6 py-4">
+                        @Html.DisplayFor(modelItem => item.DisplayOrder)
+                    </td>
+                    <td class="px-6 py-4">
+                        <a asp-action="Create" asp-route-id="@item.Id" class="hover:underline">詳細</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</section>
