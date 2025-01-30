@@ -10,6 +10,7 @@
     <Folder Include="Services\" />
     <Folder Include="Data\" />
     <Folder Include="Middlewares\" />
+    <Folder Include="wwwroot\lib\" />
   </ItemGroup>
 
 </Project>

@@ -1,0 +1,99 @@
+﻿<nav class="navbar navbar-expand-lg shadow" aria-label="Offcanvas navbar large">
+    <div class="container-fluid">
+        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">レンタカーシステム</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar2" aria-controls="offcanvasNavbar2" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar2" aria-labelledby="offcanvasNavbar2Label">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasNavbar2Label">Offcanvas</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+                <ul class="navbar-nav flex-grow-1">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            予約管理
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" asp-controller="" asp-action="">ダッシュボード</a></li>
+                            <li><a class="dropdown-item" asp-controller="" asp-action="">貸渡予約表</a></li>
+                            <li><a class="dropdown-item" asp-controller="" asp-action="">予約一覧</a></li>
+                            <li><a class="dropdown-item" asp-controller="" asp-action="">予約キャンセル一覧</a></li>
+                            <li><a class="dropdown-item" asp-controller="" asp-action="">車検予約一覧</a></li>
+                            <li><a class="dropdown-item" asp-controller="" asp-action="">点検予約一覧</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            各種管理
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" asp-controller="" asp-action="">顧客管理</a></li>
+                            <li><a class="dropdown-item" asp-controller="" asp-action="">顧客料金種別管理</a></li>
+                            <li><a class="dropdown-item" asp-controller="" asp-action="">クラス管理</a></li>
+                            <li><a class="dropdown-item" asp-controller="" asp-action="">車種管理</a></li>
+                            <li><a class="dropdown-item" asp-controller="" asp-action="">車輌管理</a></li>
+                            <li><a class="dropdown-item" asp-controller="" asp-action="">料金プラン管理</a></li>
+                            <li><a class="dropdown-item" asp-controller="" asp-action="">オプション管理</a></li>
+                            <li><a class="dropdown-item" asp-controller="" asp-action="">定休日管理</a></li>
+                            <li><a class="dropdown-item" asp-controller="" asp-action="">ハイシーズン管理</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            分析
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" asp-controller="" asp-action="">売上集計</a></li>
+                            <li><a class="dropdown-item" asp-controller="" asp-action="">車輌稼働率</a></li>
+                            <li><a class="dropdown-item" asp-controller="" asp-action="">GoogleAnalytics連携設定</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            社内管理
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" asp-controller="" asp-action="">店舗管理</a></li>
+                            <li><a class="dropdown-item" asp-controller="" asp-action="">従業員管理</a></li>
+                            <li><a class="dropdown-item" asp-controller="" asp-action="">定期報告書類の印刷</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            予約サイト設定
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" asp-controller="" asp-action="">予約サイト設定</a></li>
+                            <li><a class="dropdown-item" asp-controller="" asp-action="">コンテンツ管理</a></li>
+                            <li><a class="dropdown-item" asp-controller="" asp-action="">カスタムページ管理</a></li>
+                            <li><a class="dropdown-item" asp-controller="" asp-action="">お知らせ管理</a></li>
+                            <li><a class="dropdown-item" asp-controller="" asp-action="">SEO管理</a></li>
+                            <li><a class="dropdown-item" asp-controller="" asp-action="">入力項目管理</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            ユーザーメニュー
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="#">アカウント設定</a></li>
+                            <li><a class="dropdown-item" href="#">プラン設定</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">予約サイトへ</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">ログアウト</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>
