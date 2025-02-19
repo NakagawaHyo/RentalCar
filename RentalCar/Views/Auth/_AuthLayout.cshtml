@@ -9,17 +9,11 @@
     <link rel="stylesheet" href="~/RentalCar.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 </head>
-<body class="d-flex flex-column">
-    <header>
-        <partial name="_NavMenuPartial" />
-    </header>
+<body>
 
-    <main role="main" class="flex-grow-1">
-        <div class="container py-3">
-            @RenderBody()
-        </div>
-    </main>
-
+    <div class="d-flex flex-column min-vh-100 align-items-center justify-content-center">
+        @RenderBody()
+    </div>
     <script src="~/js/bootstrap.bundle.min.js" asp-append-version="true"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)

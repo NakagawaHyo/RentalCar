@@ -1,3 +1,28 @@
-﻿html,body {
-    height: 100vh
+﻿@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap');
+
+html, body {
+    height: 100vh;
+    font-family: "Noto Sans JP", serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.auth-container {
+    width:90%;
+    padding:1.5rem;
+}
+
+.form-group{
+    margin-bottom: 0.75rem;
+}
+
+.max-w-4xl {
+    max-width: 56rem;
+}
+
+@media (min-width: 1280px) {
+    .auth-container {
+        width: 33.333333%;
+    }
 }

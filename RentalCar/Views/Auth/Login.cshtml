@@ -1,0 +1,27 @@
+﻿@model Login
+@{
+    Layout = "_AuthLayout";
+    ViewData["Title"] = "ログイン";
+}
+
+<h3 class="mb-4">レンタカーシステム</h3>
+<div class="auth-container shadow">
+    <form asp-action="Login" asp-controller="Auth" method="post">
+        <div asp-validation-summary="All" class="text-danger" role="alert"></div>
+        <div class="mb-3">
+            <label asp-for="LoginId" class="form-label"></label>
+            <input asp-for="LoginId" type="text" class="form-control">
+            <span asp-validation-for="LoginId" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Password" class="form-label"></label>
+            <input asp-for="Password" type="password" autocomplete="current-password" class="form-control">
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+        <div class="mb-3 form-check">
+            <input asp-for="RememberMe" type="checkbox" class="form-check-input">
+            <label asp-for="RememberMe" class="form-check-label"></label>
+        </div>
+        <button type="submit" class="btn btn-primary w-100">Login</button>
+    </form>
+</div>

@@ -1,0 +1,28 @@
+﻿@model Store
+
+@{
+    ViewData["Title"] = "店舗管理";
+}
+
+<div class="max-w-4xl mx-auto">
+    <h4>店舗削除 確認</h4>
+    <form asp-action="Delete" method="post">
+        <input asp-for="Id" type="hidden" />
+        <dl class="row mt-5">
+            <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Id)</dt>
+            <dd class="col-sm-8">@Html.DisplayFor(model => model.Id)</dd>
+
+            <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Name)</dt>
+            <dd class="col-sm-8">@Html.DisplayFor(model => model.Name)</dd>
+
+            <dt class="col-sm-4">@Html.DisplayNameFor(model => model.ZipCode)</dt>
+            <dd class="col-sm-8">@Html.DisplayFor(model => model.ZipCode)</dd>
+            <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Address1)</dt>
+            <dd class="col-sm-8">@Html.DisplayFor(model => model.Address1)</dd>
+            <div class="d-flex justify-content-center mt-3">
+                <button type="submit" class="btn btn-primary">実行する</button>
+            </div>
+        </dl>
+
+    </form>
+</div>
