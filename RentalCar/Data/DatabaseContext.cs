@@ -55,6 +55,8 @@ namespace RentalCar.Data
 
         public virtual DbSet<Client> Clients { set; get; }
 
+        public virtual DbSet<Reservation> Reservations { set; get; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             // it should be placed here, otherwise it will rewrite the following settings!
@@ -146,6 +148,13 @@ namespace RentalCar.Data
                 entity.Navigation(m => m.CarDivision).AutoInclude();
                 entity.Navigation(m => m.CarType).AutoInclude();
                 entity.Navigation(m => m.Store).AutoInclude();
+            });
+
+            builder.Entity<Reservation>(entity =>
+            {
+                entity.Navigation(m => m.Car).AutoInclude();
+                entity.Navigation(m => m.Lessee).AutoInclude();
+                entity.Navigation(m => m.Driver).AutoInclude();
             });
         }
     }
