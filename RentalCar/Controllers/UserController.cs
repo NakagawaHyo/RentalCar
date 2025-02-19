@@ -31,7 +31,7 @@ namespace RentalCar.Controllers
         public async Task<IActionResult> Detail(int? id)
         {
             var user = await _context.Users.FindAsync(id) ?? new User();
-            ViewData["StoreId"] = new SelectList(_context.Set<Store>(), "Id", "Name", user.StoreId);
+            ViewData["StoreId"] = new SelectList(_context.Stores, "Id", "Name", user.StoreId);
             return View(user);
         }
 
@@ -54,7 +54,7 @@ namespace RentalCar.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["StoreId"] = new SelectList(_context.Set<Store>(), "Id", "Name", user.StoreId);
+            ViewData["StoreId"] = new SelectList(_context.Stores, "Id", "Name", user.StoreId);
             return View(user);
         }
 
