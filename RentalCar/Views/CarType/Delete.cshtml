@@ -1,0 +1,26 @@
+﻿@model CarClass
+
+@{
+    ViewData["Title"] = "クラス管理";
+}
+
+<div class="max-w-4xl mx-auto">
+    <h4>クラス削除 確認</h4>
+    <form asp-action="Delete" method="post">
+        <input asp-for="Id" type="hidden" />
+        <dl class="row mt-5">
+            <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Name)</dt>
+            <dd class="col-sm-8">@Html.DisplayFor(model => model.Name)</dd>
+
+            <dt class="col-sm-4">@Html.DisplayNameFor(model => model.CarCategory)</dt>
+            <dd class="col-sm-8">@Html.DisplayFor(model => model.CarCategory.Name)</dd>
+
+            <dt class="col-sm-4">@Html.DisplayNameFor(model => model.DisplayOrder)</dt>
+            <dd class="col-sm-8">@Html.DisplayFor(model => model.DisplayOrder)</dd>
+            <div class="d-flex justify-content-center mt-3">
+                <button type="submit" class="btn btn-primary">実行する</button>
+            </div>
+        </dl>
+
+    </form>
+</div>

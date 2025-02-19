@@ -11,33 +11,33 @@ using RentalCar.Models;
 
 namespace RentalCar.Controllers
 {
-    public class StoreController : Controller
+    public class ClientController : Controller
     {
         private readonly DatabaseContext _context;
 
-        public StoreController(DatabaseContext context)
+        public ClientController(DatabaseContext context)
         {
             _context = context;
         }
 
-        [Route("store")]
+        [Route("client")]
         public async Task<IActionResult> Index()
         {
-            var models = await _context.Stores.Where(m => m.IsDeleted == false).OrderBy(m => m.Id).ToListAsync();
+            var models = await _context.Clients.Where(m => m.IsDeleted == false).OrderBy(m => m.Id).ToListAsync();
             return View(models);
         }
 
-        [Route("store-detail")]
+        [Route("client-detail")]
         public async Task<IActionResult> Detail(int? id)
         {
-            var model = await _context.Stores.FindAsync(id) ?? new Store();
+            var model = await _context.Clients.FindAsync(id) ?? new Client();
             return View(model);
         }
 
-        [Route("store-detail")]
+        [Route("client-detail")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Detail(Store model)
+        public async Task<IActionResult> Detail(Client model)
         {
             if (ModelState.IsValid)
             {
@@ -56,10 +56,10 @@ namespace RentalCar.Controllers
             return View(model);
         }
 
-        [Route("store-delete")]
+        [Route("client-delete")]
         public async Task<IActionResult> Delete(int? id)
         {
-            var model = await _context.Stores.FindAsync(id);
+            var model = await _context.Clients.FindAsync(id);
             if(model == null)
             {
                 return RedirectToAction(nameof(NotFound));
@@ -67,13 +67,13 @@ namespace RentalCar.Controllers
             return View(model);
         }
 
-        [Route("store-delete")]
+        [Route("client-delete")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
 
         {
-            var model = await _context.Stores.FindAsync(id);
+            var model = await _context.Clients.FindAsync(id);
             if (model != null)
             {
                 model.IsDeleted = true;

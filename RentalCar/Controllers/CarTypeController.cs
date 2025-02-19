@@ -11,33 +11,34 @@ using RentalCar.Models;
 
 namespace RentalCar.Controllers
 {
-    public class StoreController : Controller
+    public class CarTypeController : Controller
     {
         private readonly DatabaseContext _context;
 
-        public StoreController(DatabaseContext context)
+        public CarTypeController(DatabaseContext context)
         {
             _context = context;
         }
 
-        [Route("store")]
+        [Route("cartype")]
         public async Task<IActionResult> Index()
         {
-            var models = await _context.Stores.Where(m => m.IsDeleted == false).OrderBy(m => m.Id).ToListAsync();
+            var models = await _context.CarTypes.Where(m => m.IsDeleted == false).OrderBy(m => m.DisplayOrder).ToListAsync();
             return View(models);
         }
 
-        [Route("store-detail")]
+        [Route("cartype-detail")]
         public async Task<IActionResult> Detail(int? id)
         {
-            var model = await _context.Stores.FindAsync(id) ?? new Store();
+            var model = await _context.CarTypes.FindAsync(id) ?? new CarType();
+            ViewData["CarClassId"] = new SelectList(_context.CarClasses, "Id", "Name", model.CarClassId);
             return View(model);
         }
 
-        [Route("store-detail")]
+        [Route("cartype-detail")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Detail(Store model)
+        public async Task<IActionResult> Detail(CarType model)
         {
             if (ModelState.IsValid)
             {
@@ -53,13 +54,14 @@ namespace RentalCar.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["CarClassId"] = new SelectList(_context.CarClasses, "Id", "Name", model.CarClassId);
             return View(model);
         }
 
-        [Route("store-delete")]
+        [Route("cartype-delete")]
         public async Task<IActionResult> Delete(int? id)
         {
-            var model = await _context.Stores.FindAsync(id);
+            var model = await _context.CarTypes.FindAsync(id);
             if(model == null)
             {
                 return RedirectToAction(nameof(NotFound));
@@ -67,13 +69,13 @@ namespace RentalCar.Controllers
             return View(model);
         }
 
-        [Route("store-delete")]
+        [Route("cartype-delete")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
 
         {
-            var model = await _context.Stores.FindAsync(id);
+            var model = await _context.CarTypes.FindAsync(id);
             if (model != null)
             {
                 model.IsDeleted = true;

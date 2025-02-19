@@ -1,0 +1,66 @@
+﻿@model Car
+
+@{
+    ViewData["Title"] = "車輌管理";
+}
+
+<div class="max-w-4xl mx-auto">
+    <h4>@(Model.Id == 0 ? "新規車種登録" : "車種詳細")</h4>
+    @if (Model.CreatedAt != null && Model.UpdatedAt != null)
+    {
+        <div class="d-lg-flex d-block justify-content-end mb-3">
+            <div class="me-lg-4">登録 ： @Model.CreatedAt</div>
+            <div>更新 ： @Model.UpdatedAt</div>
+        </div>
+    }
+    <form asp-action="Detail" method="post">
+        <div class="border px-4 py-2 mb-3">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <input asp-for="Id" type="hidden" />
+            <div class="form-group">
+                <label asp-for="CarClassId" class="control-label"></label>
+                <select asp-for="CarClassId" class="form-select" asp-items="ViewBag.CarClassId"></select>
+                <span asp-validation-for="CarClassId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CarDivisionId" class="control-label"></label>
+                <select asp-for="CarDivisionId" class="form-select" asp-items="ViewBag.CarDivisionId"></select>
+                <span asp-validation-for="CarDivisionId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CarTypeId" class="control-label"></label>
+                <select asp-for="CarTypeId" class="form-select" asp-items="ViewBag.CarTypeId"></select>
+                <span asp-validation-for="CarTypeId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StoreId" class="control-label"></label>
+                <select asp-for="StoreId" class="form-select" asp-items="ViewBag.StoreId"></select>
+                <span asp-validation-for="StoreId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CarNumber" class="control-label"></label>
+                <input asp-for="CarNumber" class="form-control" />
+                <span asp-validation-for="CarNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <textarea asp-for="Description" class="form-control" rows="3"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Remarks" class="control-label"></label>
+                <textarea asp-for="Remarks" class="form-control" rows="3"></textarea>
+                <span asp-validation-for="Remarks" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group d-flex justify-content-between">
+            <a asp-action="Index" class="btn btn-secondary">一覧へ戻る</a>
+            <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">削除する</a>
+            <input type="submit" value="@(Model.Id == 0 ? "登録" : "変更")する" class="btn btn-primary" />
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <script src="~/js/car-detail.js" defer></script>
+}

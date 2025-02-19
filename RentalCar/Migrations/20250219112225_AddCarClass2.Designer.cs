@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using RentalCar.Data;
@@ -11,9 +12,11 @@ using RentalCar.Data;
 namespace RentalCar.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20250219112225_AddCarClass2")]
+    partial class AddCarClass2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,58 +24,6 @@ namespace RentalCar.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
-
-            modelBuilder.Entity("RentalCar.Models.Car", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("CarClassId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("CarDivisionId")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("CarNumber")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<int>("CarTypeId")
-                        .HasColumnType("integer");
-
-                    b.Property<DateTime?>("CreatedAt")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("text");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("boolean");
-
-                    b.Property<string>("Remarks")
-                        .HasColumnType("text");
-
-                    b.Property<int>("StoreId")
-                        .HasColumnType("integer");
-
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CarClassId");
-
-                    b.HasIndex("CarDivisionId");
-
-                    b.HasIndex("CarTypeId");
-
-                    b.HasIndex("StoreId");
-
-                    b.ToTable("Cars");
-                });
 
             modelBuilder.Entity("RentalCar.Models.CarCategory", b =>
                 {
@@ -181,135 +132,6 @@ namespace RentalCar.Migrations
                     b.HasIndex("CarCategoryId");
 
                     b.ToTable("CarClasses");
-                });
-
-            modelBuilder.Entity("RentalCar.Models.CarDivision", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("CarDivisions");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "乗用車"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "マイクロバス"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = "貨物自動車"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Name = "特種用途車"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Name = "二輪車"
-                        });
-                });
-
-            modelBuilder.Entity("RentalCar.Models.CarType", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("CarClassId")
-                        .HasColumnType("integer");
-
-                    b.Property<DateTime?>("CreatedAt")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("text");
-
-                    b.Property<int>("DisplayOrder")
-                        .HasColumnType("integer");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("boolean");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Remarks")
-                        .HasColumnType("text");
-
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CarClassId");
-
-                    b.ToTable("CarTypes");
-                });
-
-            modelBuilder.Entity("RentalCar.Models.Client", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Address1")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Address2")
-                        .HasColumnType("text");
-
-                    b.Property<DateTime?>("CreatedAt")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("boolean");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Tel")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<string>("ZipCode")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Clients");
                 });
 
             modelBuilder.Entity("RentalCar.Models.Role", b =>
@@ -475,41 +297,6 @@ namespace RentalCar.Migrations
                     b.ToTable("UserRoles");
                 });
 
-            modelBuilder.Entity("RentalCar.Models.Car", b =>
-                {
-                    b.HasOne("RentalCar.Models.CarClass", "CarClass")
-                        .WithMany()
-                        .HasForeignKey("CarClassId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("RentalCar.Models.CarDivision", "CarDivision")
-                        .WithMany("Cars")
-                        .HasForeignKey("CarDivisionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("RentalCar.Models.CarType", "CarType")
-                        .WithMany()
-                        .HasForeignKey("CarTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("RentalCar.Models.Store", "Store")
-                        .WithMany()
-                        .HasForeignKey("StoreId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("CarClass");
-
-                    b.Navigation("CarDivision");
-
-                    b.Navigation("CarType");
-
-                    b.Navigation("Store");
-                });
-
             modelBuilder.Entity("RentalCar.Models.CarClass", b =>
                 {
                     b.HasOne("RentalCar.Models.CarCategory", "CarCategory")
@@ -519,17 +306,6 @@ namespace RentalCar.Migrations
                         .IsRequired();
 
                     b.Navigation("CarCategory");
-                });
-
-            modelBuilder.Entity("RentalCar.Models.CarType", b =>
-                {
-                    b.HasOne("RentalCar.Models.CarClass", "CarClass")
-                        .WithMany("CarTypes")
-                        .HasForeignKey("CarClassId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("CarClass");
                 });
 
             modelBuilder.Entity("RentalCar.Models.User", b =>
@@ -565,16 +341,6 @@ namespace RentalCar.Migrations
             modelBuilder.Entity("RentalCar.Models.CarCategory", b =>
                 {
                     b.Navigation("CarClasses");
-                });
-
-            modelBuilder.Entity("RentalCar.Models.CarClass", b =>
-                {
-                    b.Navigation("CarTypes");
-                });
-
-            modelBuilder.Entity("RentalCar.Models.CarDivision", b =>
-                {
-                    b.Navigation("Cars");
                 });
 
             modelBuilder.Entity("RentalCar.Models.Role", b =>

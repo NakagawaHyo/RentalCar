@@ -1,0 +1,52 @@
+﻿@model CarClass
+
+@{
+    ViewData["Title"] = "クラス管理";
+}
+
+<div class="max-w-4xl mx-auto">
+    <h4>@(Model.Id == 0 ? "新規クラス登録" : "クラス詳細")</h4>
+    @if (Model.CreatedAt != null && Model.UpdatedAt != null)
+    {
+        <div class="d-lg-flex d-block justify-content-end mb-3">
+            <div class="me-lg-4">登録 ： @Model.CreatedAt</div>
+            <div>更新 ： @Model.UpdatedAt</div>
+        </div>
+    }
+    <form asp-action="Detail" method="post">
+        <div class="border px-4 py-2 mb-3">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <input asp-for="Id" type="hidden" />
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CarCategoryId" class="control-label"></label>
+                <select asp-for="CarCategoryId" class="form-select" asp-items="ViewBag.CarCategoryId"></select>
+                <span asp-validation-for="CarCategoryId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <textarea asp-for="Description" class="form-control" rows="3"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Remarks" class="control-label"></label>
+                <textarea asp-for="Remarks" class="form-control" rows="3"></textarea>
+                <span asp-validation-for="Remarks" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DisplayOrder" class="control-label"></label>
+                <input asp-for="DisplayOrder" class="form-control" />
+                <span asp-validation-for="DisplayOrder" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group d-flex justify-content-between">
+            <a asp-action="Index" class="btn btn-secondary">一覧へ戻る</a>
+            <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">削除する</a>
+            <input type="submit" value="@(Model.Id == 0 ? "登録" : "変更")する" class="btn btn-primary" />
+        </div>
+    </form>
+</div>

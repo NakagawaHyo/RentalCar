@@ -1,0 +1,51 @@
+﻿@model IEnumerable<Car>
+
+@{
+    ViewData["Title"] = "車輌管理";
+}
+
+<div class="d-flex align-items-center justify-content-between mb-3">
+    <h3 class="m-0">@ViewData["Title"]</h3>
+    <a class="btn btn-primary" asp-action="Detail">新規車輌登録</a>
+</div>
+<table class="table align-middle">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CarClass)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CarType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CarNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Store)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CarClass.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CarType.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CarNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Store.Name)
+                </td>
+                <td>
+                    <a asp-action="Detail" asp-route-id="@item.Id" class="btn btn-secondary">詳細</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

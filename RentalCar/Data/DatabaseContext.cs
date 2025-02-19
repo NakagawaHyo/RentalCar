@@ -43,6 +43,18 @@ namespace RentalCar.Data
 
         public virtual DbSet<Store> Stores { set; get; }
 
+        public virtual DbSet<CarCategory> CarCategories { set; get; }
+
+        public virtual DbSet<CarClass> CarClasses { set; get; }
+
+        public virtual DbSet<CarType> CarTypes { set; get; }
+
+        public virtual DbSet<CarDivision> CarDivisions { set; get; }
+
+        public virtual DbSet<Car> Cars { set; get; }
+
+        public virtual DbSet<Client> Clients { set; get; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             // it should be placed here, otherwise it will rewrite the following settings!
@@ -84,12 +96,57 @@ namespace RentalCar.Data
                 .IsRequired();
 
             builder.Entity<Store>().HasData(
-                new Store { Id = 1, Name = "管理者", Description="管理拠点", ZipCode= "100-8929", Address1= "東京都千代田区霞が関２丁目１−１"}
+                new Store { Id = 1, Name = "管理拠点", Description="管理拠点", ZipCode= "100-8929", Address1= "東京都千代田区霞が関２丁目１−１"}
             );
 
             builder.Entity<User>().HasData(
                 new User { Id = 1, Name = "管理者", Email = "admin@admin.com", LoginId = "admin", Password = "admin", StoreId = 1}
             );
+
+            builder.Entity<CarClass>()
+                .HasOne(e => e.CarCategory)
+                .WithMany(e => e.CarClasses)
+                .HasForeignKey(e => e.CarCategoryId)
+                .IsRequired();
+
+            builder.Entity<CarCategory>().HasData(
+               new CarCategory { Id = 1, Name = "乗用車" },
+               new CarCategory { Id = 2, Name = "軽自動車" },
+               new CarCategory { Id = 3, Name = "エコカー" },
+               new CarCategory { Id = 4, Name = "スポーツカー" },
+               new CarCategory { Id = 5, Name = "ミニバン・ワゴン" },
+               new CarCategory { Id = 6, Name = "SUV" },
+               new CarCategory { Id = 7, Name = "バン" },
+               new CarCategory { Id = 8, Name = "トラック" },
+               new CarCategory { Id = 9, Name = "バス" },
+               new CarCategory { Id = 10, Name = "その他" }
+           );
+
+            builder.Entity<CarDivision>().HasData(
+               new CarDivision { Id = 1, Name = "乗用車" },
+               new CarDivision { Id = 2, Name = "マイクロバス" },
+               new CarDivision { Id = 3, Name = "貨物自動車" },
+               new CarDivision { Id = 4, Name = "特種用途車" },
+               new CarDivision { Id = 5, Name = "二輪車" }
+           );
+
+            builder.Entity<CarClass>(entity =>
+            {
+                entity.Navigation(m => m.CarCategory).AutoInclude();
+            });
+
+            builder.Entity<CarType>(entity =>
+            {
+                entity.Navigation(m => m.CarClass).AutoInclude();
+            });
+
+            builder.Entity<Car>(entity =>
+            {
+                entity.Navigation(m => m.CarClass).AutoInclude();
+                entity.Navigation(m => m.CarDivision).AutoInclude();
+                entity.Navigation(m => m.CarType).AutoInclude();
+                entity.Navigation(m => m.Store).AutoInclude();
+            });
         }
     }
 }

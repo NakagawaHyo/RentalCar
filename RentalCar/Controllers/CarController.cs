@@ -6,39 +6,43 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using NuGet.Protocol;
 using RentalCar.Data;
 using RentalCar.Models;
 
 namespace RentalCar.Controllers
 {
-    public class UserController : Controller
+    public class CarController : Controller
     {
         private readonly DatabaseContext _context;
 
-        public UserController(DatabaseContext context)
+        public CarController(DatabaseContext context)
         {
             _context = context;
         }
 
-        [Route("user")]
+        [Route("car")]
         public async Task<IActionResult> Index()
         {
-            var models = await _context.Users.Where(m => m.IsDeleted == false).OrderBy(m => m.Id).ToListAsync();
+            var models = await _context.Cars.Where(m => m.IsDeleted == false).OrderBy(m => m.Id).ToListAsync();
             return View(models);
         }
 
-        [Route("user-detail")]
+        [Route("car-detail")]
         public async Task<IActionResult> Detail(int? id)
         {
-            var model = await _context.Users.FindAsync(id) ?? new User();
+            var model = await _context.Cars.FindAsync(id) ?? new Car();
+            ViewData["CarClassId"] = new SelectList(_context.CarClasses, "Id", "Name", model.CarClassId);
+            ViewData["CarDivisionId"] = new SelectList(_context.CarDivisions, "Id", "Name", model.CarDivisionId);
+            ViewData["CarTypeId"] = new SelectList(_context.CarTypes.Where(m => m.CarClassId == model.CarClassId), "Id", "Name", model.CarTypeId);
             ViewData["StoreId"] = new SelectList(_context.Stores, "Id", "Name", model.StoreId);
             return View(model);
         }
 
-        [Route("user-detail")]
+        [Route("car-detail")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Detail(User model)
+        public async Task<IActionResult> Detail(Car model)
         {
             if (ModelState.IsValid)
             {
@@ -54,14 +58,17 @@ namespace RentalCar.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["CarClassId"] = new SelectList(_context.CarClasses, "Id", "Name", model.CarClassId);
+            ViewData["CarDivisionId"] = new SelectList(_context.CarDivisions, "Id", "Name", model.CarDivisionId);
+            ViewData["CarTypeId"] = new SelectList(_context.CarTypes.Where(m => m.CarClassId == model.CarClassId), "Id", "Name", model.CarTypeId);
             ViewData["StoreId"] = new SelectList(_context.Stores, "Id", "Name", model.StoreId);
             return View(model);
         }
 
-        [Route("user-delete")]
+        [Route("car-delete")]
         public async Task<IActionResult> Delete(int? id)
         {
-            var model = await _context.Users.FindAsync(id);
+            var model = await _context.Cars.FindAsync(id);
             if(model == null)
             {
                 return RedirectToAction(nameof(NotFound));
@@ -69,13 +76,13 @@ namespace RentalCar.Controllers
             return View(model);
         }
 
-        [Route("user-delete")]
+        [Route("car-delete")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
 
         {
-            var model = await _context.Users.FindAsync(id);
+            var model = await _context.Cars.FindAsync(id);
             if (model != null)
             {
                 model.IsDeleted = true;
@@ -84,6 +91,13 @@ namespace RentalCar.Controllers
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
+        }
+
+        [HttpGet("get-car-type")]
+        public IActionResult GetCarType(int? CarClassId)
+        {
+            var models = _context.CarTypes.IgnoreAutoIncludes().Where(m => m.CarClassId == CarClassId).ToJson();
+            return Content(models, "application/json");
         }
     }
 }
